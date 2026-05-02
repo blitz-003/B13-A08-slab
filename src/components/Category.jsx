@@ -2,7 +2,7 @@ import { Button } from "@heroui/react";
 import Link from "next/link";
 
 const Category = async () => {
-  const res = await fetch("https://pixgen-eta.vercel.app/category.json");
+  const res = await fetch("https://slab-json-server.onrender.com/categories");
   const categories = await res.json();
   return (
     <div className="max-w-7xl mx-auto mb-5 space-x-3">
