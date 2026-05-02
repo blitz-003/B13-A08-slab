@@ -11,7 +11,8 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -34,7 +35,13 @@ export default function SignUpPage() {
     console.log({ data, error });
 
     if (!error) {
-      router.push("/");
+      toast.success("Account created 🎉");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
+    } else {
+      toast.error(error.message);
     }
   };
 
@@ -43,13 +50,35 @@ export default function SignUpPage() {
       <h1 className="text-center text-2xl font-bold">Sign Up</h1>
 
       <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>
-        <TextField isRequired name="name" type="text">
+        <TextField
+          isRequired
+          name="name"
+          type="text"
+          validate={(value) => {
+            if (value.length <= 0) {
+              return "Please enter a name";
+            }
+
+            return null;
+          }}
+        >
           <Label>Name</Label>
           <Input placeholder="Enter your name" />
           <FieldError />
         </TextField>
 
-        <TextField isRequired name="image" type="text">
+        <TextField
+          isRequired
+          name="image"
+          type="text"
+          validate={(value) => {
+            if (value.length <= 0) {
+              return "Please enter an Image URL";
+            }
+
+            return null;
+          }}
+        >
           <Label>Image URL</Label>
           <Input placeholder="Image URL" />
           <FieldError />
@@ -79,7 +108,7 @@ export default function SignUpPage() {
           type="password"
           validate={(value) => {
             if (value.length < 8) {
-              return "Password must be at least 8 characters";
+              return "Password must be at least 8 characters with one uppercase letter and at least one number";
             }
             if (!/[A-Z]/.test(value)) {
               return "Password must contain at least one uppercase letter";
