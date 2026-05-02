@@ -9,14 +9,12 @@ const PhotoDetailsPage = async ({ params }) => {
 
   return (
     <div>
-      <h1>{product?.title}</h1>
-      <p>{product.prompt}</p>
-      <Card className="w-[75vw] h-[80vh] overflow-hidden mx-auto">
+      <Card className="w-[80vw] h-[80vh] overflow-hidden mx-auto mt-10 shadow-2xl">
         <div className="flex h-full flex-col md:flex-row">
           {/* LEFT: IMAGE (50%) */}
           <div className="w-full md:w-1/2 h-full">
             <Image
-              src="https://heroui-assets.nyc3.cdn.digitaloceanspaces.com/docs/cherries.jpeg"
+              src={product.image}
               alt=""
               className="w-full h-full object-contain"
               width={1200}
@@ -25,26 +23,41 @@ const PhotoDetailsPage = async ({ params }) => {
           </div>
 
           {/* RIGHT: DETAILS (50%) */}
-          <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-6">
-            <Card.Header className="p-0 mb-3">
-              <Card.Title className="text-2xl">
-                Become an ACME Creator!
+          <div className="w-full md:w-1/2 h-full flex flex-col justify-center p-6 gap-4">
+            {/* TITLE + DESCRIPTION */}
+            <Card.Header className="p-0">
+              <Card.Title className="text-3xl font-semibold">
+                {product.title}
               </Card.Title>
-              <Card.Description>
-                Lorem ipsum dolor sit amet consectetur. Sed arcu donec id
-                aliquam dolor sed amet faucibus etiam.
+
+              <Card.Description className="text-base text-gray-600 mt-2">
+                {product.description}
               </Card.Description>
             </Card.Header>
 
-            {/* Footer cleaned (no button, no extra UI) */}
-            <Card.Footer className="p-0 mt-4">
-              <div className="flex flex-col">
-                <span className="text-sm font-medium">Only 10 spots</span>
-                <span className="text-xs text-muted">
-                  Submission ends Oct 10.
-                </span>
-              </div>
-            </Card.Footer>
+            {/* PRODUCT DETAILS (ALIGNED) */}
+            <div className="flex flex-col gap-2 text-base text-gray-700">
+              <span>
+                <strong>Category:</strong> {product.category}
+              </span>
+              <span>
+                <strong>Material:</strong> {product.material}
+              </span>
+              <span>
+                <strong>Size:</strong> {product.dimensions}
+              </span>
+
+              {/* PRICE */}
+              <span className="text-xl font-semibold text-black mt-2">
+                {product.currency === "USD" ? "$" : product.currency}{" "}
+                {product.price}
+              </span>
+
+              {/* STOCK BADGE */}
+              <span className="mt-2 inline-block w-fit px-3 py-1 text-sm font-medium rounded-full bg-green-100 text-green-700">
+                {product.inStock ? "In Stock" : "Out of Stock"}
+              </span>
+            </div>
           </div>
         </div>
       </Card>
