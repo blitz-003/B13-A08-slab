@@ -1,23 +1,46 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Category from "@/components/Category";
 import PhotoCard from "@/components/PhotoCard";
+import SearchBar from "@/components/SearchBar";
 
-const AllPhotosPage = async ({ searchParams }) => {
-  const { category } = await searchParams;
-  console.log(category);
-  const res = await fetch("https://slab-json-server.onrender.com/products");
-  const photos = await res.json();
+const AllPhotosPage = () => {
+  const [photos, setPhotos] = useState([]);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
 
-  const filteredPhotos = category
-    ? photos.filter(
-        (photo) => photo.category.toLowerCase() == category.toLowerCase(),
-      )
-    : photos;
+  useEffect(() => {
+    fetch("https://slab-json-server.onrender.com/products")
+      .then((res) => res.json())
+      .then((data) => setPhotos(data));
+  }, []);
+
+  const filteredPhotos = photos.filter((photo) => {
+    const matchCategory = category
+      ? photo.category.toLowerCase() === category.toLowerCase()
+      : true;
+
+    const matchSearch = photo.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return matchCategory && matchSearch;
+  });
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold m-4">All Photos</h1>
+    <div className="container mx-auto">
+      <div className="grid grid-cols-3 items-center m-4">
+        <div></div>
 
-      <Category />
+        <h1 className="text-2xl font-bold text-center">All Tiles</h1>
+
+        <div className="flex justify-end">
+          <SearchBar search={search} setSearch={setSearch} />
+        </div>
+      </div>
+
+      <Category setCategory={setCategory} />
 
       <div className="grid grid-cols-4 gap-5">
         {filteredPhotos.map((photo) => (

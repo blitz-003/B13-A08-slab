@@ -1,21 +1,30 @@
-import { Button } from "@heroui/react";
-import Link from "next/link";
+"use client";
 
-const Category = async () => {
-  const res = await fetch("https://slab-json-server.onrender.com/categories");
-  const categories = await res.json();
+import { useEffect, useState } from "react";
+import { Button } from "@heroui/react";
+
+const Category = ({ setCategory }) => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("https://slab-json-server.onrender.com/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data));
+  }, []);
+
   return (
-    <div className="max-w-7xl mx-auto mb-5 space-x-3">
+    <div className="max-w-7xl mx-auto my-8 space-x-3 flex items-center justify-center">
+      <p className="text-lg font-bold mr-6">Categories</p>
+
       {categories.map((category) => (
-        <Link
+        <Button
           key={category.id}
-          href={`?category=${category.name.toLowerCase()}`}
+          variant="outline"
+          size="sm"
+          onClick={() => setCategory(category.name)}
         >
-          {" "}
-          <Button variant="outline" size="sm">
-            {category.name}
-          </Button>
-        </Link>
+          {category.name}
+        </Button>
       ))}
     </div>
   );
