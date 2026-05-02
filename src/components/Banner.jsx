@@ -1,5 +1,6 @@
 import { Button } from "@heroui/react";
 import Link from "next/link";
+import Marquee from "react-fast-marquee";
 
 const Banner = () => {
   return (

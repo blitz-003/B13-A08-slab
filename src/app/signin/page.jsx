@@ -12,6 +12,7 @@ import {
   TextField,
 } from "@heroui/react";
 import { GrGoogle } from "react-icons/gr";
+import { toast } from "react-toastify";
 
 export default function SignInPage() {
   const onSubmit = async (e) => {
@@ -25,6 +26,13 @@ export default function SignInPage() {
       password,
       callbackURL: "/",
     });
+
+    if (error) {
+      toast.error("Email or password is wrong");
+      return;
+    } else {
+      toast.success("Sign In successful");
+    }
 
     console.log({ data, error });
   };
@@ -59,18 +67,11 @@ export default function SignInPage() {
 
         <TextField
           isRequired
-          minLength={8}
           name="password"
           type="password"
           validate={(value) => {
-            if (value.length < 8) {
-              return "Password must be at least 8 characters";
-            }
-            if (!/[A-Z]/.test(value)) {
-              return "Password must contain at least one uppercase letter";
-            }
-            if (!/[0-9]/.test(value)) {
-              return "Password must contain at least one number";
+            if (value.length <= 0) {
+              return "Please enter password";
             }
 
             return null;
@@ -78,9 +79,7 @@ export default function SignInPage() {
         >
           <Label>Password</Label>
           <Input placeholder="Enter your password" />
-          <Description>
-            Must be at least 8 characters with 1 uppercase and 1 number
-          </Description>
+
           <FieldError />
         </TextField>
 
