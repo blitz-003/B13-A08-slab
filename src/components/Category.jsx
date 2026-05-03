@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@heroui/react";
 
-const Category = ({ setCategory }) => {
+const Category = ({ setCategory, category }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -15,15 +15,27 @@ const Category = ({ setCategory }) => {
   return (
     <div className="max-w-7xl mx-auto my-8 space-x-3 flex items-center justify-center">
       <p className="text-lg font-bold mr-6">Categories</p>
+      <Button
+        key={0}
+        variant="outline"
+        size="sm"
+        className={category == "" ? "bg-blue-500 text-white" : ""}
+        onClick={() => setCategory("")}
+      >
+        All
+      </Button>
 
-      {categories.map((category) => (
+      {categories.map((category_loop) => (
         <Button
-          key={category.id}
+          key={category_loop.id}
           variant="outline"
           size="sm"
-          onClick={() => setCategory(category.name)}
+          className={
+            category_loop.name === category ? "bg-blue-500 text-white" : ""
+          }
+          onClick={() => setCategory(category_loop.name)}
         >
-          {category.name}
+          {category_loop.name}
         </Button>
       ))}
     </div>
