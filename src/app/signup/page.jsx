@@ -11,7 +11,9 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
+import { Router } from "next/router";
 import { toast } from "react-toastify";
 
 export default function SignUpPage() {
@@ -38,7 +40,7 @@ export default function SignUpPage() {
       toast.success("Account created 🎉");
 
       setTimeout(() => {
-        router.push("/");
+        Router.push("/");
       }, 1000);
     } else {
       toast.error(error.message);
@@ -128,16 +130,24 @@ export default function SignUpPage() {
           <FieldError />
         </TextField>
 
-        <div className="flex gap-2">
-          <Button type="submit">
-            <Check />
-            Submit
-          </Button>
-          <Button type="reset" variant="secondary">
-            Reset
-          </Button>
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-6">
+            <Button type="submit" className="w-full">
+              <Check />
+              Submit
+            </Button>
+          </div>
+          <div className="col-span-6">
+            <Button type="reset" variant="secondary" className="w-full">
+              Reset
+            </Button>
+          </div>
         </div>
       </Form>
+
+      <Link href={"/signin"} className="text-center text-blue-500 mt-4">
+        Already have an account? Click to Log In
+      </Link>
     </Card>
   );
 }

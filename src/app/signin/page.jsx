@@ -11,6 +11,7 @@ import {
   Label,
   TextField,
 } from "@heroui/react";
+import Link from "next/link";
 import { GrGoogle } from "react-icons/gr";
 import { toast } from "react-toastify";
 
@@ -83,14 +84,18 @@ export default function SignInPage() {
           <FieldError />
         </TextField>
 
-        <div className="flex gap-2">
-          <Button type="submit">
-            <Check />
-            Submit
-          </Button>
-          <Button type="reset" variant="secondary">
-            Reset
-          </Button>
+        <div className="grid grid-cols-12 gap-4">
+          <div className="col-span-6">
+            <Button type="submit" className="w-full">
+              <Check />
+              Submit
+            </Button>
+          </div>
+          <div className="col-span-6">
+            <Button type="reset" variant="secondary" className="w-full">
+              Reset
+            </Button>
+          </div>
         </div>
       </Form>
 
@@ -103,6 +108,9 @@ export default function SignInPage() {
       >
         <GrGoogle /> Sign In With Google
       </Button>
+      <Link href={"/signup"} className="text-center text-blue-500 mt-4">
+        Don&apos;t have an account? Click to Register
+      </Link>
     </Card>
   );
 }
