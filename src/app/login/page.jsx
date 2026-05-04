@@ -12,10 +12,12 @@ import {
   TextField,
 } from "@heroui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { GrGoogle } from "react-icons/gr";
 import { toast } from "react-toastify";
 
 export default function SignInPage() {
+  const router = useRouter();
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -25,7 +27,6 @@ export default function SignInPage() {
     const { data, error } = await authClient.signIn.email({
       email,
       password,
-      callbackURL: "/",
     });
 
     if (error) {
@@ -33,6 +34,10 @@ export default function SignInPage() {
       return;
     } else {
       toast.success("Sign In successful");
+      router.refresh();
+      setTimeout(() => {
+        router.push("/");
+      }, 1000);
     }
 
     console.log({ data, error });
