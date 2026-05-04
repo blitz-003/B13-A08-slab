@@ -19,8 +19,11 @@ export default function NewNavBar() {
   const handleSignOut = async () => {
     await authClient.signOut();
 
+    toast.success("Logged Out Successfully");
     router.refresh();
-    router.push("/?logout=true");
+    setTimeout(() => {
+      router.push("/");
+    }, 1000);
   };
 
   return (

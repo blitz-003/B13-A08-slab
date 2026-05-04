@@ -27,9 +27,9 @@ export default function RootLayout({ children }) {
         <NewNavBar />
         {/* <Navbar /> */}
         <main className="">{children} </main>
-        <ToastHandler />
-        <ToastContainer position="top-right" autoClose={3000} />
         <Footer />
+
+        <ToastContainer position="top-right" autoClose={3000} />
       </body>
     </html>
   );
