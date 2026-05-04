@@ -34,10 +34,9 @@ export default function SignInPage() {
       return;
     } else {
       toast.success("Sign In successful");
+
       router.refresh();
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      router.push("/");
     }
 
     console.log({ data, error });
