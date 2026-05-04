@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NewNavBar from "@/components/NewNavBar";
+import ToastHandler from "@/components/ToastHandler";
 
 const OutfitFont = Outfit({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
         <NewNavBar />
         {/* <Navbar /> */}
         <main className="">{children} </main>
+        <ToastHandler />
         <ToastContainer position="top-right" autoClose={3000} />
         <Footer />
       </body>

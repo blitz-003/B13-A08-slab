@@ -5,24 +5,26 @@ import { Avatar, Button } from "@heroui/react";
 import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
+import { router } from "better-auth/api";
+import { useRouter } from "next/navigation";
 
 export default function NewNavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session, isPending } = authClient.useSession();
+
   const userData = authClient.useSession();
   const user = userData.data?.user;
+  const router = useRouter();
 
   const handleSignOut = async () => {
     await authClient.signOut();
 
-    toast.success("Successfully logged out");
-
-    setTimeout(() => {
-      router.push("/");
-    }, 1000);
+    router.refresh();
+    router.push("/?logout=true");
   };
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b border-separator backdrop-blur-lg">
+    <nav className="sticky top-0 z-40 w-full border-separator backdrop-blur-lg">
       <header className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <div className="flex items-center gap-4">
           <button
@@ -82,7 +84,7 @@ export default function NewNavBar() {
           </li>
         </ul>
         <div className="hidden items-center gap-4 md:flex">
-          {!user && (
+          {!user && isPending && (
             <ul className="flex items-center  text-sm gap-5">
               <li>
                 <Link href={"/register"}>Register</Link>
@@ -94,8 +96,18 @@ export default function NewNavBar() {
               </li>
             </ul>
           )}
-
-          {user && (
+          {isPending ? null : !user ? (
+            <ul className="flex items-center text-sm gap-5">
+              <li>
+                <Link href="/register">Register</Link>
+              </li>
+              <li>
+                <Link href="/login">
+                  <Button variant="outline">Log In</Button>
+                </Link>
+              </li>
+            </ul>
+          ) : (
             <div className="flex gap-3">
               <Avatar size="sm">
                 <Avatar.Image
@@ -103,7 +115,7 @@ export default function NewNavBar() {
                   src={user?.image}
                   referrerPolicy="no-referrer"
                 />
-                <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
+                <Avatar.Fallback>{user?.name?.charAt(0)}</Avatar.Fallback>
               </Avatar>
 
               <Button onClick={handleSignOut} size="sm" variant="danger">
@@ -133,30 +145,19 @@ export default function NewNavBar() {
               </Link>
             </li>
             <li className="mt-4 flex flex-col gap-2 border-t border-separator pt-4">
-              {!user && (
-                <ul className="flex items-center  text-sm gap-5">
+              {isPending ? null : !user ? (
+                <ul className="flex items-center text-sm gap-5">
                   <li>
-                    <Link href={"/register"}>Register</Link>
+                    <Link href="/register">Register</Link>
                   </li>
                   <li>
-                    <Link href={"/login"}>
+                    <Link href="/login">
                       <Button variant="outline">Log In</Button>
                     </Link>
                   </li>
                 </ul>
-              )}
-
-              {user && (
+              ) : (
                 <div className="flex gap-3">
-                  {/* <Avatar size="sm">
-                    <Avatar.Image
-                      alt="John Doe"
-                      src={user?.image}
-                      referrerPolicy="no-referrer"
-                    />
-                    <Avatar.Fallback>{user?.name.charAt(0)}</Avatar.Fallback>
-                  </Avatar> */}
-
                   <Button onClick={handleSignOut} size="sm" variant="danger">
                     SignOut
                   </Button>

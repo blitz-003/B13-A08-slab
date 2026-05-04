@@ -13,7 +13,6 @@ export default function Home() {
       <AnnouncementBar />
 
       <TopGenerations />
-      <ToastContainer />
     </div>
   );
 }
