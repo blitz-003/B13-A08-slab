@@ -48,10 +48,10 @@ export default function SignUpPage() {
   };
 
   return (
-    <Card className="border mx-auto w-125 py-10 mt-5">
-      <h1 className="text-center text-2xl font-bold">Sign Up</h1>
+    <Card className="border mx-auto w-[90vw] md:w-[70vw] py-10 mt-5 max-w-xl">
+      <h1 className="text-center text-2xl font-bold">Register</h1>
 
-      <Form className="flex w-96 mx-auto flex-col gap-4" onSubmit={onSubmit}>
+      <Form className="flex w-[95%] mx-auto flex-col gap-4" onSubmit={onSubmit}>
         <TextField
           isRequired
           name="name"
@@ -145,7 +145,7 @@ export default function SignUpPage() {
         </div>
       </Form>
 
-      <Link href={"/signin"} className="text-center text-blue-500 mt-4">
+      <Link href={"/login"} className="text-center text-blue-500 mt-4">
         Already have an account? Click to Log In
       </Link>
     </Card>

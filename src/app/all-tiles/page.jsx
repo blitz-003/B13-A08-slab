@@ -35,7 +35,7 @@ const AllPhotosPage = () => {
   return (
     <div className="container mx-auto">
       {/* Header */}
-      <div className="grid grid-cols-3 items-center m-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 items-center m-4">
         <div></div>
 
         <h1 className="text-2xl font-bold text-center">All Tiles</h1>
@@ -46,11 +46,12 @@ const AllPhotosPage = () => {
       </div>
 
       {/* Category */}
+      <p className="text-lg font-bold text-center">Categories</p>
       <Category setCategory={setCategory} category={category} />
 
       {/* Content */}
       {loading ? (
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-5">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="h-40 bg-gray-200 animate-pulse rounded" />
           ))}
@@ -58,7 +59,7 @@ const AllPhotosPage = () => {
       ) : filteredPhotos.length === 0 ? (
         <p className="text-4xl font-bold text-center pt-8">No products found</p>
       ) : (
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-5">
           {filteredPhotos.map((photo) => (
             <PhotoCard key={photo.id} photo={photo} />
           ))}

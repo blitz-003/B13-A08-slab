@@ -39,7 +39,7 @@ const PhotoCard = ({ photo }) => {
             </div>
            </div> */}
 
-      <Link href={`/all-photos/${photo.id}`}>
+      <Link href={`/all-tiles/${photo.id}`}>
         {" "}
         <Button variant="outline" className={"w-full"}>
           View Details

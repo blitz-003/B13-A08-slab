@@ -20,9 +20,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="border-b px-2">
-      <nav className=" flex justify-between items-center  py-3 max-w-7xl mx-auto w-full">
-        <div className="flex gap-2 items-center">
+    <div className="border-b px-2 w-[90vw] mx-auto">
+      <nav className="flex justify-between items-center py-3 mx-auto w-full">
+        <Link href={"/"} className="flex gap-2 items-center">
           <Image
             src={"/logo.png"}
             alt="logo"
@@ -32,14 +32,14 @@ const Navbar = () => {
             className="object-cover h-auto w-auto"
           />
           <h3 className="font-black text-lg">Slab.</h3>
-        </div>
+        </Link>
 
-        <ul className="flex items-center gap-5 text-sm">
+        <ul className="hidden sm:flex items-center gap-5 text-sm">
           <li>
             <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href={"/all-photos"}>All Tiles</Link>
+            <Link href={"/all-tiles"}>All Tiles</Link>
           </li>
 
           <li>
@@ -51,10 +51,10 @@ const Navbar = () => {
           {!user && (
             <ul className="flex items-center  text-sm gap-5">
               <li>
-                <Link href={"/signup"}>Register</Link>
+                <Link href={"/register"}>Register</Link>
               </li>
               <li>
-                <Link href={"/signin"}>
+                <Link href={"/login"}>
                   <Button variant="outline">Log In</Button>
                 </Link>
               </li>

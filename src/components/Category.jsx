@@ -13,8 +13,7 @@ const Category = ({ setCategory, category }) => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto my-8 space-x-3 flex items-center justify-center">
-      <p className="text-lg font-bold mr-6">Categories</p>
+    <div className="w-[90vw] mx-auto my-8 grid grid-cols-3 gap-4 sm:grid-cols-7 lg:grid-cols-10 xl:grid-cols-12">
       <Button
         key={0}
         variant="outline"

@@ -27,7 +27,7 @@ export default function AnimatedGrid({ children }) {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.4 }}
-      className="grid grid-cols-4 gap-5"
+      className="grid grid-cols-1 md:grid-cols-4 gap-5"
     >
       {children.map((child, i) => (
         <motion.div key={i} variants={item}>
