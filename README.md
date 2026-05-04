@@ -93,17 +93,13 @@ This project demonstrates full-stack development using **Next.js App Router**, *
 ```bash
 git clone https://github.com/blitz-003/B13-A08-slab.git
 cd ./B13-A08-slab
-- create an .env file with your own credentials
-
------------------------------------
-.env file contents
-----------------------------------
+touch .env && cat <<EOT >> .env
 BETTER_AUTH_SECRET=<better_auth_secret>
-BETTER_AUTH_URL=http://localhost:3000 # Base URL of your app
+BETTER_AUTH_URL=http://localhost:3000
 MONGODB_URI=<mongodb_uri>
 GOOGLE_CLIENT_ID=<google_client_id>
 GOOGLE_CLIENT_SECRET=<google_client_secret>
--------------------------------------
+EOT
 npm install
 npm run dev
 ```
