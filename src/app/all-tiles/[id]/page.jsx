@@ -19,8 +19,8 @@ const PhotoDetailsPage = async ({ params }) => {
               src={product.image}
               alt=""
               className="w-full h-full object-contain"
-              width={1200}
-              height={1000}
+              width={1000}
+              height={800}
             />
           </div>
 
